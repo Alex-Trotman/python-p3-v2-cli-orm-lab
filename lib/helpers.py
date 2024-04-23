@@ -88,17 +88,18 @@ def find_employee_by_id():
 
 def create_employee():
     name = input("Enter the employee's name: ")
-    location = input("Enter the employee's location: ")
+    job_title = input("Enter the employee's location: ")
     department_id = input("Enter the employee's department id: ")
+    print(type(department_id))
 
-    # Check if department exists in the database
     department = Department.find_by_id(department_id)
-    if department is None:
+    print(department)
+    if not department:
         print(f"Error: Department with ID {department_id} does not exist.")
         return
 
     try:
-        employee = Employee.create(name, location, department_id)
+        employee = Employee.create(name, job_title, int(department_id))
         print(f'Success: {employee}')
     except Exception as exc:
         print("Error creating employee: ", exc)
