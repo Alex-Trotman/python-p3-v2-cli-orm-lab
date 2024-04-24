@@ -132,6 +132,16 @@ def delete_employee():
 
 
 def list_department_employees():
-    pass
-    # id_ = input("Ener the departments's id: ")
-    # if 
+    department_id = input("Enter the department's id: ")
+    department = Department.find_by_id(department_id)
+    
+    if department:
+        print(f"Listing employees for Department {department_id}: {department.name}")
+        employees = department.employees()  # Assuming this method correctly retrieves the associated employees
+        if employees:
+            for employee in employees:
+                print(employee)
+        else:
+            print("No employees found in this department.")
+    else:
+        print(f"Department with ID {department_id} not found")
